@@ -1,0 +1,22 @@
+def stuff(message):
+    ans = ""
+    count = 0
+
+    for bit in message:
+        ans += bit
+
+        if bit == '1':
+            count += 1
+        else:
+            count = 0
+
+        if count == 5:
+            ans += '0'  # Insert a '0' after five consecutive '1's
+            count = 0
+
+    return ans
+
+#Input
+message = "0011010111110111111100"
+stuffed = stuff(message)
+print(f"\nStuffed Message = {stuffed}\n")
