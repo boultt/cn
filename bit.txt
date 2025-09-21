@@ -16,7 +16,35 @@ def stuff(message):
 
     return ans
 
-#Input
+
+def destuff(stuffed_message):
+    ans = ""
+    count = 0
+    i = 0
+
+    while i < len(stuffed_message):
+        bit = stuffed_message[i]
+        ans += bit
+
+        if bit == '1':
+            count += 1
+        else:
+            count = 0
+
+        if count == 5:
+            # Skip the stuffed '0'
+            i += 1
+            count = 0
+
+        i += 1
+
+    return ans
+
+
+# Example usage
 message = "0011010111110111111100"
 stuffed = stuff(message)
-print(f"\nStuffed Message = {stuffed}\n")
+print(f"Stuffed Message   = {stuffed}")
+
+destuffed = destuff(stuffed)
+print(f"Destuffed Message = {destuffed}")
