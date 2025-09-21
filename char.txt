@@ -1,0 +1,29 @@
+def char_stuff(data, flag="F", esc="E"):
+    stuffed = flag
+    for ch in data:
+        if ch in (flag, esc):
+            stuffed += esc
+        stuffed += ch
+    stuffed += flag
+    return stuffed
+
+def char_destuff(stuffed, flag="F", esc="E"):
+    if stuffed[0] != flag or stuffed[-1] != flag:
+        raise ValueError("Invalid Frame")
+    
+    data = ""
+    i = 1
+    while i < len(stuffed) - 1:
+        if stuffed[i] == esc:
+            i += 1
+        data += stuffed[i]
+        i += 1
+    return data
+
+# Input
+message = "FEHELLOEF"
+stuffed_msg = char_stuff(message)
+print(f"Stuffed Message: {stuffed_msg}")
+
+destuffed_msg = char_destuff(stuffed_msg)
+print(f"Destuffed Message: {destuffed_msg}")
