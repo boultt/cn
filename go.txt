@@ -1,0 +1,26 @@
+import random
+
+def go_back_n(window_size, total_frames):
+    next_frame_to_send = 0
+    ack_expected = 0
+
+    while ack_expected < total_frames:
+        # Send frames in the window
+        for i in range(window_size):
+            if next_frame_to_send < total_frames:
+                print(f"Sent Frame {next_frame_to_send}")
+                next_frame_to_send += 1
+
+        # Simulate ACK or loss
+        ack = random.choice([True, False])  # randomly ACK or drop
+        if ack:
+            print(f"ACK received for Frame {ack_expected}")
+            ack_expected += 1
+        else:
+            print(f"Frame {ack_expected} lost! Go-Back-N triggered")
+            next_frame_to_send = ack_expected  # go back and resend
+
+# Run Simulation
+window_size = 2
+total_frames = 5
+go_back_n(window_size, total_frames)
