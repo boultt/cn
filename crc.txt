@@ -1,0 +1,41 @@
+
+#Transmitter Side
+# Input data and generator
+data = input("Enter data: ")            # Example: 1101011011
+gen = input("Enter generator: ")        # Example: 10011
+
+n = len(gen) - 1
+data2 = data + '0' * n
+rem = list(data2)
+
+# Division operation
+for i in range(len(data)):
+    if rem[i] == '1':
+        for j in range(len(gen)):
+            rem[i + j] = '0' if rem[i + j] == gen[j] else '1'
+
+# CRC calculation
+crc = ''.join(rem[-n:])
+transmitted = data + crc
+
+print("\nCRC:", crc)
+print("Transmitted Data:", transmitted)
+
+#Receiver Side
+received = transmitted
+rem_receiver = list(received)
+
+# Division operation at receiver
+for i in range(len(data)):
+    if rem_receiver[i] == '1':
+        for j in range(len(gen)):
+            rem_receiver[i + j] = '0' if rem_receiver[i + j] == gen[j] else '1'
+
+# Remainder check
+remainder = ''.join(rem_receiver[-n:])
+print("\nRemainder at receiver end:", remainder)
+
+if '1' in remainder:
+    print("Error detected in received data!")
+else:
+    print("No error detected in received data.")
