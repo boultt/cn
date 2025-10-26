@@ -25,7 +25,7 @@ def subnet_calculator():
             print(f"Total Addresses  : {total_addresses}")
 
         except ValueError:
-            print("\n❌ Invalid input! Please enter a valid IP address in CIDR format.\n")
+            print("\n Invalid input! Please enter a valid IP address in CIDR format.\n")
 
         # Continue or exit
         choice = input("\nDo you want to calculate for another IP? (y/n): ").lower()
