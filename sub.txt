@@ -1,0 +1,38 @@
+import ipaddress
+
+def subnet_calculator():
+    """Menu-driven subnet calculator"""
+
+    print("\n===== IP Subnetting Calculator =====\n")
+
+    while True:
+        try:
+            ip_input = input("Enter an IP address with CIDR (e.g., 205.16.37.39/28): ").strip()
+            network = ipaddress.ip_network(ip_input, strict=False)
+
+            network_id = network.network_address
+            subnet_mask = network.netmask
+            first_address = list(network.hosts())[0]        # first usable address
+            last_address = list(network.hosts())[-1]        # last usable address
+            total_addresses = network.num_addresses
+
+            # Display results
+            print("\n--- Subnet Details ---")
+            print(f"Network ID       : {network_id}")
+            print(f"Subnet Mask      : {subnet_mask}")
+            print(f"First Address    : {first_address}")
+            print(f"Last Address     : {last_address}")
+            print(f"Total Addresses  : {total_addresses}")
+
+        except ValueError:
+            print("\n❌ Invalid input! Please enter a valid IP address in CIDR format.\n")
+
+        # Continue or exit
+        choice = input("\nDo you want to calculate for another IP? (y/n): ").lower()
+        if choice != 'y':
+            print("\nExiting the program. Thank you!")
+            break
+
+
+if __name__ == "__main__":
+    subnet_calculator()
