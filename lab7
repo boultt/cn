@@ -1,0 +1,31 @@
+Procedure :-
+
+OFF all firewalls in PCS
+
+Router Configuration
+
+cmd run as administrator :- regedit
+
+Open: HKEY LOCAL MACHINE -> system -> CurrentControlSet -> Services -> TCPIP-> Parameters(not drop down just click on it) -> [PEnableRouter (double click on it and set Value to 1 and hexadecimal)
+
+Go to cmd as administrator and -> route delete 0.0.0.0
+
+Client Configuration
+
+cmd run as administrator :-
+
+ipconfig
+
+route add serverIPAddress mask 255.255.255.255 routerIPAddress (output: OK!)
+
+ping serverIPAddress
+
+Server Configuration
+
+cmd run as administrator :-
+
+ipconfig
+
+route add clientIPAddress mask 255.255.255.255 router PAddress (output: OK!)
+
+ping clientIPAddress
